@@ -1,29 +1,48 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-postgres
 {
-    "name": "C# (.NET) and PostgreSQL",
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "app",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [5000, 5001, 5432],
-	// "portsAttributes": {
-	//		"5001": {
-	//			"protocol": "https"
-	//		}
-	// }
-
-    // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": "dotnet --info",
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+  "name": "C# (.NET) and PostgreSQL",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp",
+        "k--kato.docomment",
+        "fudge.auto-using",
+        "esbenp.prettier-vscode",
+        "arjun.swagger-viewer",
+        "visualstudioexptteam.vscodeintellicode",
+        "usernamehw.errorlens",
+        "editorconfig.editorconfig",
+        "kreativ-software.csharpextensions",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "johnpapa.vscode-peacock",
+        "streetsidesoftware.code-spell-checker",
+        "richie5um2.vscode-sort-json",
+        "ms-azuretools.vscode-docker",
+        "GitHub.copilot",
+        "GitHub.vscode-pull-request-github"
+      ]
+    }
+  }
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+  // Configure tool-specific properties.
+  // "customizations": {},
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [5000, 5001, 5432],
+  // "portsAttributes": {
+  //		"5001": {
+  //			"protocol": "https"
+  //		}
+  // }
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "dotnet --info",
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
 }
-

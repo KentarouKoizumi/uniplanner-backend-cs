@@ -1,38 +1,53 @@
+using System.Reflection;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Api;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-
-
 public class Startup
 {
-  public void ConfigureServices(IServiceCollection services)
-  {
-    services.AddControllers();
-
-    services.AddSwaggerGen(c =>
+    public Startup(IConfiguration configuration)
     {
-      c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
-    });
-  }
+        Configuration = configuration;
 
-  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-  {
-    app.UseRouting();
-    app.UseEndpoints(endpoints =>
+        var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Information()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .MinimumLevel.Override("System", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .Enrich.WithProperty("Assembly", assemblyName!)
+            .Enrich.FromLogContext()
+            .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:1j}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate)
+            .CreateLogger();
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
     {
-      app.UseSwagger();
-      app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
+        services.AddControllers();
 
-      app.UseRouting();
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllers();
-      });
-    });
-  }
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
+        });
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseRouting();
+        app.UseEndpoints(endpoints =>
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+        });
+    }
 }

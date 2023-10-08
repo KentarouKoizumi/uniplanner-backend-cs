@@ -1,4 +1,15 @@
 {
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+  "cSpell.enabled": true,
+  "cSpell.ignorePaths": [
+    ".github",
+    ".vscode"
+  ],
+  "editor.formatOnSave": true,
+  "omnisharp.useEditorFormattingSettings": false,
+  "dotnet.defaultSolution": "TestApp.sln",
   "files.exclude": {
     "**/bin": true,
     "**/obj": true,
