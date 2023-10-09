@@ -9,6 +9,9 @@ public class Event : Base
     public string Name { get; private set; }
 
     [Required]
+    public string Description { get; private set; }
+
+    [Required]
     public bool isWeekly { get; private set; }
 
 
