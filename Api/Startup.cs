@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Reflection;
 using Api.DependencyInjection;
 using Api.Utils;
@@ -42,6 +44,9 @@ public class Startup
 
         services.AddSwaggerGen(c =>
         {
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
         });
 

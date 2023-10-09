@@ -7,9 +7,12 @@ namespace Api.Controllers;
 [Route("[controller]")]
 public class RootController : ControllerBase
 {
+    /// <summary>
+    /// お試しエンドポイント
+    /// </summary>
     [HttpGet]
-    public string Get([FromServices] IGreetingUseCase greetingUseCase)
+    public string Get([FromServices] IGreetingUseCase useCase)
     {
-        return greetingUseCase.Execute();
+        return useCase.Execute();
     }
 }
