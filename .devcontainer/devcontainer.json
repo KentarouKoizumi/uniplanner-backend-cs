@@ -2,8 +2,9 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-postgres
 {
   "name": "uniplanner-backend",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
+  "dockerComposeFile": ["../docker-compose.yml","docker-compose.yml"],
+  "postCreateCommand": "sh /dotnet-app/scripts/backend/postCreateCommand.sh",
+  "service": "uniplanner",
   "workspaceFolder": "/dotnet-app",
   "customizations": {
     "vscode": {

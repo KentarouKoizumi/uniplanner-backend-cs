@@ -1,0 +1,35 @@
+services:
+  uniplanner:
+    image: mcr.microsoft.com/dotnet/sdk:7.0
+    container_name: uniplanner
+    ports:
+      - "5000:80"
+    env_file:
+      - .env
+    volumes:
+      - .:/dotnet-app
+    command: sh /dotnet-app/scripts/backend/init-dev.sh
+    networks:
+      - uniplanner-dev
+
+  postgres-db:
+    container_name: db
+    image: postgres:16
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=password
+    networks:
+      - uniplanner-dev
+
+volumes:
+  db-store:
+
+networks:
+  uniplanner-dev:
+    driver: bridge
+    internal: false
+    name: uniplanner-dev
