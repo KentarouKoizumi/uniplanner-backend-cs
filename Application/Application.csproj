@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
+    <NoWarn>$(NoWarn);8618</NoWarn>
   </PropertyGroup>
 
 </Project>

@@ -1,4 +1,7 @@
+using Application.Commons;
+using Application.DataObjects.ResponseModels.Root;
 using Application.UseCases.Root.Greeting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -11,8 +14,18 @@ public class RootController : ControllerBase
     /// お試しエンドポイント
     /// </summary>
     [HttpGet]
-    public string Get([FromServices] IGreetingUseCase useCase)
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GreetingResponseModel))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ExecutionError))]
+    public IActionResult Get([FromServices] IGreetingUseCase useCase)
     {
-        return useCase.Execute();
+        var result = useCase.Execute();
+        if (result.Error != null)
+        {
+            return new ObjectResult(result.Error)
+            {
+                StatusCode = result.Error.Code
+            };
+        }
+        return Ok(result.ResponseModel);
     }
 }

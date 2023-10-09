@@ -1,9 +1,21 @@
-﻿namespace Application.UseCases.Root.Greeting;
+﻿using Application.Commons;
+using Application.DataObjects.ResponseModels.Root;
+
+namespace Application.UseCases.Root.Greeting;
 
 public class GreetingUseCase : IGreetingUseCase
 {
-    public string Execute()
+    public ExecutionResult<GreetingResponseModel> Execute()
     {
-        return "Hello World!";
+        var result = new ExecutionResult<GreetingResponseModel>();
+
+        var greeting = new GreetingResponseModel
+        {
+            Message = "Hello, World!"
+        };
+
+        result.ResponseModel = greeting;
+
+        return result;
     }
 }
