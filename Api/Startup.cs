@@ -1,4 +1,9 @@
 using System.Reflection;
+using Api.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
@@ -33,6 +38,9 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
         });
+
+        services.AddDataServices();
+        services.AddUseCases();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

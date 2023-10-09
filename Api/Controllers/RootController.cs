@@ -1,3 +1,4 @@
+using Application.UseCases.Root.Greeting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -7,8 +8,8 @@ namespace Api.Controllers;
 public class RootController : ControllerBase
 {
     [HttpGet]
-    public string Get()
+    public string Get([FromServices] IGreetingUseCase greetingUseCase)
     {
-        return "Hello World!";
+        return greetingUseCase.Execute();
     }
 }
