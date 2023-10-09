@@ -9,11 +9,11 @@
   ],
   "editor.formatOnSave": true,
   "omnisharp.useEditorFormattingSettings": false,
-  "dotnet.defaultSolution": "TestApp.sln",
+  "dotnet.defaultSolution": "WebApi.sln",
   "files.exclude": {
     "**/bin": true,
     "**/obj": true,
     "**/Properties": true,
     "**/.vs": true,
-  }
+  },
 }
